@@ -18,8 +18,8 @@ def get_count_clicks(token, shorted_url):
     bitlink_site_url = f"https://api-ssl.bitly.com/v4/bitlinks/{shorted_url}/clicks/summary"
     headers = {f"Authorization": "Bearer {token}"}
     payload = {
-           'unit': 'month',
-           'units': '-1',
+        'unit': 'month',
+        'units': '-1',
     }
     response = requests.get(bitlink_site_url, params=payload, headers=headers)
     response.raise_for_status()
@@ -34,15 +34,12 @@ def main():
     bitly_token = os.getenv("BITLY_TOKEN")
     parse_url = urlparse(args.url)
     try:
-        print('Count clicks:', get_count_clicks(bitly_token, parse_url.path))
+        print('Count clicks:', get_count_clicks(bitly_token, f'{parse_url.netloc}{parse_url.path}'))
     except requests.exceptions.HTTPError:
         try:
-            print('Count clicks:', get_count_clicks(bitly_token, parse_url.netloc+parse_url.path))
+            print('Bitlink', get_shorten_link(bitly_token, args.url))
         except requests.exceptions.HTTPError:
-            try:
-                print('Bitlink', get_shorten_link(bitly_token, args.url))
-            except requests.exceptions.HTTPError:
-                raise requests.exceptions.HTTPError(f'{args.url} incorrect url')
+            raise requests.exceptions.HTTPError(f'{args.url} incorrect url')
               
 if __name__=="__main__":
     main()    

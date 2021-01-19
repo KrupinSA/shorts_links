@@ -4,7 +4,10 @@ This program for create short link from your url. And you can also see how many 
 
 ### How to install
 
-Register and get a token on the site [bit.ly](https://bit.ly/). Save the received token in the file ".env" under name "BITLY_TOKEN"="..."
+Register and get a token on the site [bit.ly](https://bit.ly/). Save the received token in the file ".env" under name BITLY_TOKEN. example:
+```
+BITLY_TOKEN="..."
+```
 
 Python3 should be already installed. 
 Then use `pip` (or `pip3`, if there is a conflict with Python2) to install dependencies:
