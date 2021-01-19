@@ -6,6 +6,9 @@ import os
 
 
 def get_shorten_link(token, url):
+    """
+    Requests and returns a short link
+    """
     bitlink_site_url = "https://api-ssl.bitly.com/v4/bitlinks"
     headers = {f"Authorization": "Bearer {token}"}
     payload = {"long_url": url}
@@ -15,6 +18,9 @@ def get_shorten_link(token, url):
 
 
 def get_count_clicks(token, shorted_url):
+    """
+    Returns the number of requests for this short link
+    """
     bitlink_site_url = f"https://api-ssl.bitly.com/v4/bitlinks/{shorted_url}/clicks/summary"
     headers = {f"Authorization": "Bearer {token}"}
     payload = {
