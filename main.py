@@ -32,9 +32,9 @@ def main():
     args = parser.parse_args()
     load_dotenv()
     bitly_token = os.getenv("BITLY_TOKEN")
-    parse_url = urlparse(args.url)
+    parsed_url = urlparse(args.url)
     try:
-        print('Count clicks:', get_count_clicks(bitly_token, f'{parse_url.netloc}{parse_url.path}'))
+        print('Count clicks:', get_count_clicks(bitly_token, f'{parsed_url.netloc}{parsed_url.path}'))
     except requests.exceptions.HTTPError:
         try:
             print('Bitlink', get_shorten_link(bitly_token, args.url))
